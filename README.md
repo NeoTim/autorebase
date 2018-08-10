@@ -1,7 +1,7 @@
 [![build status](https://img.shields.io/circleci/project/github/tibdex/autorebase.svg)](https://circleci.com/gh/tibdex/autorebase)
 
 <h1 align="center">
-  <img src="packages/autorebase/assets/logo.svg" height="250" width="250"/>
+  <img src="assets/logo.svg" height="250" width="250"/>
   <p>Autorebase</p>
   <sup>:panda_face: Automated Pull Request Rebasing and Merging</sup>
 </h1>

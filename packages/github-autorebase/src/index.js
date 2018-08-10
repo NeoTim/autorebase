@@ -7,7 +7,7 @@ import {
   type RepoName,
   type RepoOwner,
   deleteReference,
-} from "@tibdex/shared-internals";
+} from "@tibdex/shared-github-internals/src/git";
 import createDebug from "debug";
 import { rebasePullRequest } from "github-rebase";
 

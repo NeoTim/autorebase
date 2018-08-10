@@ -6,19 +6,23 @@ const path = require("path");
 
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const pkgDir = require("pkg-dir");
-const webpack = require("webpack");
 const ZipPlugin = require("zip-webpack-plugin");
 
-const { name } = require("./package");
+const pkgRoot = pkgDir.sync(__dirname);
 
 module.exports = {
-  entry: require.resolve("./src/main"),
+  entry: require.resolve("./src"),
   mode: "production",
   module: {
     rules: [
       {
-        exclude: /node_modules/,
-        test: /\.js$/,
+        include: [
+          path.dirname(
+            require.resolve("@tibdex/shared-github-internals/src/app")
+          ),
+          path.join(pkgRoot, "src"),
+        ],
+        test: /\.js$/u,
         use: {
           loader: require.resolve("babel-loader"),
         },
@@ -32,12 +36,13 @@ module.exports = {
   output: {
     filename: "GitHubWebhook/index.js",
     libraryTarget: "commonjs2",
-    path: path.join(pkgDir.sync(__dirname), "lib"),
+    path: path.join(pkgRoot, "app"),
   },
   plugins: [
-    new webpack.IgnorePlugin(/^encoding$/, /node-fetch/),
     new CopyWebpackPlugin(["src/wwwroot"]),
-    new ZipPlugin({ filename: path.format({ base: name, ext: ".zip" }) }),
+    new ZipPlugin({
+      filename: path.format({ base: "autorebase", ext: ".zip" }),
+    }),
   ],
   target: "node",
 };

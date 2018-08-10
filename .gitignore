@@ -3,5 +3,6 @@
 
 .env
 
+app/
 lib/
 node_modules/

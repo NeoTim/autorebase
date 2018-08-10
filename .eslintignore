@@ -2,7 +2,8 @@
 !.*.js
 
 /coverage/
-
 /flow-typed/npm/
 
+app/
 lib/
+node_modules/

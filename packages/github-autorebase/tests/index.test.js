@@ -2,16 +2,19 @@
 
 import assert from "assert";
 
-import { deleteReference, fetchReferenceSha } from "@tibdex/shared-internals";
-import { createTestContext } from "@tibdex/shared-internals/tests/context";
+import {
+  deleteReference,
+  fetchReferenceSha,
+} from "@tibdex/shared-github-internals/src/git";
+import { createTestContext } from "@tibdex/shared-github-internals/tests/context";
 import {
   createPullRequest,
   createReferences,
-} from "@tibdex/shared-internals/tests/git";
+} from "@tibdex/shared-github-internals/tests/git";
 import promiseRetry from "promise-retry";
 import generateUuid from "uuid/v4";
 
-import autorebase, { rebasingLabel } from "../src/autorebase";
+import autorebase, { rebasingLabel } from "../src";
 
 const protectBranch = async ({ octokit, owner, ref: branch, repo }) => {
   await octokit.repos.updateBranchProtection({

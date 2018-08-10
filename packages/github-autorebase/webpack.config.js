@@ -1,24 +1,26 @@
 /* eslint-env node */
-/* eslint-disable security/detect-non-literal-regexp */
 
 "use strict";
 
 const path = require("path");
 
 const pkgDir = require("pkg-dir");
-const webpack = require("webpack");
 
-const { dependencies } = require("./package");
+const pkgRoot = pkgDir.sync(__dirname);
 
 module.exports = {
   entry: require.resolve("./src"),
-  externals: new RegExp(`^(${Object.keys(dependencies).join("|")})(/.*)?$`),
   mode: "production",
   module: {
     rules: [
       {
-        exclude: /node_modules/,
-        test: /\.js$/,
+        include: [
+          path.dirname(
+            require.resolve("@tibdex/shared-github-internals/src/git")
+          ),
+          path.join(pkgRoot, "src"),
+        ],
+        test: /\.js$/u,
         use: {
           loader: require.resolve("babel-loader"),
         },
@@ -32,8 +34,7 @@ module.exports = {
   output: {
     filename: "index.js",
     libraryTarget: "commonjs2",
-    path: path.join(pkgDir.sync(__dirname), "lib"),
+    path: path.join(pkgRoot, "lib"),
   },
-  plugins: [new webpack.IgnorePlugin(/^encoding$/, /node-fetch/)],
   target: "node",
 };

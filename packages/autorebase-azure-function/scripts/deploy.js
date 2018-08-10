@@ -9,7 +9,7 @@ const { createReadStream } = require("fs");
 const envalid = require("envalid");
 const fetch = require("node-fetch");
 
-const zipPath = require.resolve("../lib/autorebase.zip");
+const zipPath = require.resolve("../app/autorebase.zip");
 
 const getBasicAuthorizationHeader = ({ username, password }) =>
   `Basic ${Buffer.from(`${username}:${password}`, "utf8").toString("base64")}`;

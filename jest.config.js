@@ -11,4 +11,5 @@ module.exports = {
     },
   },
   reporters: ["default", ["jest-junit", { output: "./reports/junit.xml" }]],
+  transformIgnorePatterns: ["node_modules/(?!(@tibdex)/)"],
 };
